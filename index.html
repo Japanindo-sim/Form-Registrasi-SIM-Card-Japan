@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pemesanan SIMCARD JP-SMART</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFFFFF;
+            --accent-color: #8B0000;
+            --text-color: #1a1a1a;
+            --label-color: #333333;
+            --border-color: #dcdcdc;
+            --background-color: #f8f9fa;
+            --success-bg: #e9f6ec;
+            --success-text: #42b72a;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            background-image: linear-gradient(135deg, #fdfdff 0%, #f8f9fa 100%);
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        /* Form Container Card */
+        .form-container {
+            background-color: var(--primary-color);
+            padding: 2.5rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            max-width: 700px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #e7e7e7;
+        }
+
+        /* Header */
+        .form-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: var(--label-color);
+            font-size: 15px;
+        }
+        
+        .form-group .label-note {
+            font-weight: 400;
+            font-size: 13px;
+            color: #777;
+            margin-top: -0.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* Input Fields Styling */
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        }
+
+        /* Radio Button Styling */
+        .radio-group {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background-color: #fafafa;
+        }
+        
+        .radio-group h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .radio-group .sub-judul {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .radio-option {
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .radio-option:hover {
+            border-color: var(--accent-color);
+        }
+
+        .radio-option:last-child { margin-bottom: 0; }
+
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+        }
+        .radio-option label {
+            margin: 0;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        /* File Upload Styling */
+        .file-upload-wrapper {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: var(--accent-color);
+            background-color: #fff8f8;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-icon svg {
+            width: 48px;
+            height: 48px;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        
+        .file-upload-text {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .file-upload-filename {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* Image Banner Styling */
+        .banner-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #f0f2f5;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #7a0000;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:disabled {
+            background-color: #c08080;
+            cursor: not-allowed;
+            transform: translateY(0);
+        }
+        
+        /* Success Message */
+        #success-message {
+            display: none;
+            padding: 1.5rem;
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        #success-message strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+        <h1 style="color:#7a0000;">FORMULIR PEMESANAN SIMCARD JP-SMART - JAPAN</h1>
+        <p style="color:#000000;">Data, email, dan foto yang Anda kirimkan akan direkam saat Anda mengunggah file dan mengirimkan formulir ini.</p>
+        </div>
+
+
+        <form id="simcard-form">
+            <div class="form-group">
+                <label for="nama-lengkap">1. Nama Lengkap</label>
+                <input type="text" id="nama-lengkap" name="Nama Lengkap" class="form-control" placeholder="Tulis sesuai Zaryu Card (huruf kapital)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tanggal-lahir">2. Tanggal Lahir</label>
+                <input type="date" id="tanggal-lahir" name="Tanggal Lahir" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat-jepang">3. Alamat Tempat Tinggal di Jepang + Kode Pos</label>
+                <textarea id="alamat-jepang" name="Alamat Jepang" class="form-control" rows="3" placeholder="Contoh: 100-0001, Tokyo-to, Chiyoda-ku, Chiyoda 1-1" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="rencana-pulang">4. Rencana Pulang ke Indonesia</label>
+                <input type="date" id="rencana-pulang" name="Rencana Pulang" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="lpk">5. Dari LPK Mana?</label>
+                <input type="text" id="lpk" name="LPK/SO" class="form-control" placeholder="Contoh: LPK JIAEC / IM JAPAN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">6. No WhatsApp atau Telepon Kamu Saat Ini</label>
+                <input type="tel" id="whatsapp" name="No WhatsApp" class="form-control" placeholder="Contoh: +81 80-1234-5678" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">7. Email Aktif</label>
+                <input type="email" id="email" name="Email" class="form-control" placeholder="contoh@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="tanggal-aktivasi">8. Tanggal aktivasi kartu simcard JP Smart</label>
+                <p class="label-note">kartu bisa digunakan sesuai tanggal yang dipilih.</p>
+                <input type="date" id="tanggal-aktivasi" name="Tanggal Aktivasi" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hp">9. Merk & Tipe HP</label>
+                <input type="text" id="hp" name="Merk HP" class="form-control" placeholder="Contoh: iPhone 16 Pro Max 1TB" required>
+            </div>
+            
+            <!-- PERTANYAAN BARU DITAMBAHKAN DI SINI -->
+            <div class="form-group">
+                <label for="referal">10. Kode Referal / Referensi</label>
+                <input type="text" id="referal" name="Kode Referal" class="form-control" placeholder="Contoh: AKA Apparel Championship / Sensei Sabine / Fb / Tiktok / Lain Nya">
+            </div>
+
+            <div class="form-group">
+                <label>11. Pilihan Paket Bulanan</label>
+                <img src="img/pict-3.png" alt="Banner Pilihan Paket" class="banner-img">
+                 <div class="radio-group">
+                    <h3 style="color:#7a0000;">Harga ¥3300 (Biaya Aktfiasi Awal)</h3>
+                    <p class="sub-judul">(termasuk simcard + free kuota 2 bulan)</p>
+                    
+                    <div class="radio-option">
+                        <input type="radio" id="paket1" name="Pilihan Paket" value="3 GB Call Sim - Sinyal 5G (¥1.408/bulan)" required>
+                        <label for="paket1">3 GB Call Sim - Sinyal 5G (¥1.408/bulan)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="paket2" name="Pilihan Paket" value="20 GB Call Sim - Sinyal 5G (¥2.178/bulan)">
+                        <label for="paket2">20 GB Call Sim - Sinyal 5G (¥2.178/bulan)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="paket3" name="Pilihan Paket" value="100 GB Call Sim - Sinyal 5G (¥5.478/bulan)">
+                        <label for="paket3">100 GB Call Sim - Sinyal 5G (¥5.478/bulan)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="paket4" name="Pilihan Paket" value="3 GB Data Sim - Sinyal 4G LTE (¥1.078/bulan)">
+                        <label for="paket4">3 GB Data Sim - Sinyal 4G LTE (¥1.078/bulan)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="paket5" name="Pilihan Paket" value="20 GB Data Sim - Sinyal 4G LTE (¥1.848/bulan)">
+                        <label for="paket5">20 GB Data Sim - Sinyal 4G LTE (¥1.848/bulan)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="paket6" name="Pilihan Paket" value="100 GB Data Sim - Sinyal 4G LTE (¥5.148/bulan)">
+                        <label for="paket6">100 GB Data Sim - Sinyal 4G LTE (¥5.148/bulan)</label>
+                    </div>
+                 </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="zaryu-depan-upload">12. Upload Foto Zaryu Card (Depan)</label>
+                <img src="img/pict-4.png" alt="Banner Contoh Zaryu card Depan" class="banner-img">
+                <label for="zaryu-depan-upload" class="file-upload-wrapper">
+                     <div class="file-upload-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                     </div>
+                    <span class="file-upload-text">Klik atau seret file ke sini</span>
+                    <div id="zaryu-depan-filename" class="file-upload-filename"></div>
+                </label>
+                <input type="file" id="zaryu-depan-upload" name="Foto Zaryu Card (Depan)" accept="image/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="zaryu-belakang-upload">13. Upload Foto Zaryu Card (Belakang)</label>
+                <img src="img/pict-5.png" alt="Banner Contoh Zaryu card Belakang" class="banner-img">
+                <label for="zaryu-belakang-upload" class="file-upload-wrapper">
+                    <div class="file-upload-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                     </div>
+                    <span class="file-upload-text">Klik atau seret file ke sini</span>
+                    <div id="zaryu-belakang-filename" class="file-upload-filename"></div>
+                </label>
+                <input type="file" id="zaryu-belakang-upload" name="Foto Zaryu Card (Belakang)" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label for="paspor-upload">14. Upload Foto Paspor (Jika sudah terima/memiliki paspor)</label>
+                <img src="img/pict-1.png" alt="Banner Contoh Paspor" class="banner-img">
+                <label for="paspor-upload" class="file-upload-wrapper">
+                    <div class="file-upload-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                     </div>
+                    <span class="file-upload-text">Klik atau seret file ke sini</span>
+                    <div id="paspor-filename" class="file-upload-filename"></div>
+                </label>
+                <input type="file" id="paspor-upload" name="Foto Paspor" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-button">Kirim Pendaftaran</button>
+        </form>
+        
+        <div id="success-message">
+            <strong>Terima kasih!</strong> Formulir Anda telah berhasil dikirim. Kami akan segera memproses pendaftaran Anda.
+        </div>
+    </div>
+
+    <script>
+        // PENTING: Ganti URL ini dengan URL Web App dari Google Apps Script Anda
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx95qvJyiW_p8xb7vcripaG7uVlwxClqiOr6-EUC1H3ovL7nJ4SSs6TmkmlGHl-0HEf/exec'; 
+
+        // --- Elemen-elemen Form ---
+        const form = document.getElementById('simcard-form');
+        const submitButton = document.getElementById('submit-button');
+        const successMessage = document.getElementById('success-message');
+        const namaLengkapInput = document.getElementById('nama-lengkap');
+        
+        const zaryuDepanUpload = document.getElementById('zaryu-depan-upload');
+        const zaryuBelakangUpload = document.getElementById('zaryu-belakang-upload');
+        const pasporUpload = document.getElementById('paspor-upload');
+        
+        const zaryuDepanFilename = document.getElementById('zaryu-depan-filename');
+        const zaryuBelakangFilename = document.getElementById('zaryu-belakang-filename');
+        const pasporFilename = document.getElementById('paspor-filename');
+
+        // --- Event Listener ---
+
+        // Auto-kapitalisasi untuk Nama Lengkap
+        namaLengkapInput.addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        // Menampilkan nama file yang di-upload
+        function setupFileUploadListener(uploadElement, filenameElement) {
+             uploadElement.addEventListener('change', function() {
+                filenameElement.textContent = this.files.length > 0 ? this.files[0].name : '';
+            });
+        }
+        setupFileUploadListener(zaryuDepanUpload, zaryuDepanFilename);
+        setupFileUploadListener(zaryuBelakangUpload, zaryuBelakangFilename);
+        setupFileUploadListener(pasporUpload, pasporFilename);
+
+
+        // Proses Pengiriman Form
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!SCRIPT_URL) {
+                alert('URL Google Apps Script belum diatur. Silakan periksa kode dan ikuti instruksi.');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Mengirim...';
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (typeof value !== 'object') {
+                    data[key] = value;
+                }
+            });
+
+            const zaryuDepanFile = zaryuDepanUpload.files[0];
+            const zaryuBelakangFile = zaryuBelakangUpload.files[0];
+            const pasporFile = pasporUpload.files[0];
+            const filePromises = [];
+
+            const processFile = (file, key) => {
+                if (file) {
+                    return readFileAsBase64(file).then(base64 => {
+                        data[key] = {
+                            fileName: file.name,
+                            mimeType: file.type,
+                            data: base64.split(',')[1] // Ambil hanya data base64
+                        };
+                    });
+                }
+                return Promise.resolve();
+            };
+
+            filePromises.push(processFile(zaryuDepanFile, 'Foto Zaryu Card (Depan)'));
+            filePromises.push(processFile(zaryuBelakangFile, 'Foto Zaryu Card (Belakang)'));
+            filePromises.push(processFile(pasporFile, 'Foto Paspor'));
+            
+            Promise.all(filePromises).then(() => {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data) // Kirim sebagai string, Apps Script akan parsing
+                })
+                .then(res => res.json()) // Tunggu response JSON dari Apps Script
+                .then(response => {
+                    console.log("SUCCESS!", response);
+                    if(response.result === "success") {
+                        form.reset();
+                        zaryuDepanFilename.textContent = '';
+                        zaryuBelakangFilename.textContent = '';
+                        pasporFilename.textContent = '';
+                        form.style.display = 'none';
+                        successMessage.style.display = 'block';
+                    } else {
+                         throw new Error(response.message || "Unknown error from script");
+                    }
+                })
+                .catch(err => {
+                    console.error("ERROR!", err);
+                    alert('Terjadi kesalahan saat mengirim formulir: ' + err.message);
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Kirim Pendaftaran';
+                });
+            });
+        });
+
+        // Fungsi untuk membaca file sebagai Base64
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html>
+
