@@ -298,7 +298,6 @@
                 <input type="text" id="hp" name="Merk HP" class="form-control" placeholder="Contoh: iPhone 16 Pro Max 1TB" required>
             </div>
             
-            <!-- PERTANYAAN BARU DITAMBAHKAN DI SINI -->
             <div class="form-group">
                 <label for="referal">10. Kode Referal / Referensi</label>
                 <input type="text" id="referal" name="Kode Referal" class="form-control" placeholder="Contoh: AKA Apparel Championship / Sensei Sabine / Fb / Tiktok / Lain Nya">
@@ -337,9 +336,54 @@
                     </div>
                  </div>
             </div>
+
+            <div class="form-group">
+                <label>12. Dari mana Anda mengetahui informasi mengenai JP SMART SIM?</label>
+                <div class="radio-group" id="sumber-info-group">
+                    <div class="radio-option">
+                        <input type="radio" id="sumber-ig" name="Sumber Informasi" value="Instagram" required>
+                        <label for="sumber-ig">Instagram</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="sumber-tiktok" name="Sumber Informasi" value="TikTok">
+                        <label for="sumber-tiktok">TikTok</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="sumber-fb" name="Sumber Informasi" value="Facebook">
+                        <label for="sumber-fb">Facebook</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="sumber-teman" name="Sumber Informasi" value="Teman / Rekan">
+                        <label for="sumber-teman">Teman / Rekan</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="sumber-lpk" name="Sumber Informasi" value="Sosialisasi di LPK">
+                        <label for="sumber-lpk">Sosialisasi di LPK</label>
+                    </div>
+                    <div class="radio-option" style="align-items: center; display: flex;">
+                        <input type="radio" id="sumber-lainnya" name="Sumber Informasi" value="Lainnya">
+                        <label for="sumber-lainnya" style="margin-right: 10px; white-space: nowrap; width: auto;">Lainnya:</label>
+                        <input type="text" id="sumber-lainnya-text" class="form-control" style="flex-grow: 1; padding: 8px;" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" id="pic-group" style="display: none;">
+                <label>13. Jika mendapatkan informasi dari Sosialisasi di LPK atau Team JP SMART SIM, dengan siapa Anda terhubung?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="pic-there" name="PIC" value="Mba There">
+                        <label for="pic-there">Mba There</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="pic-hegar" name="PIC" value="Mas Hegar">
+                        <label for="pic-hegar">Mas Hegar</label>
+                    </div>
+                </div>
+            </div>
             
             <div class="form-group">
-                <label for="zaryu-depan-upload">12. Upload Foto Zaryu Card (Depan)</label>
+                <label for="zaryu-depan-upload">14. Upload Foto Zaryu Card (Depan)</label>
                 <img src="img/pict-4.png" alt="Banner Contoh Zaryu card Depan" class="banner-img">
                 <label for="zaryu-depan-upload" class="file-upload-wrapper">
                      <div class="file-upload-icon">
@@ -352,7 +396,7 @@
             </div>
             
             <div class="form-group">
-                <label for="zaryu-belakang-upload">13. Upload Foto Zaryu Card (Belakang)</label>
+                <label for="zaryu-belakang-upload">15. Upload Foto Zaryu Card (Belakang)</label>
                 <img src="img/pict-5.png" alt="Banner Contoh Zaryu card Belakang" class="banner-img">
                 <label for="zaryu-belakang-upload" class="file-upload-wrapper">
                     <div class="file-upload-icon">
@@ -365,7 +409,7 @@
             </div>
 
             <div class="form-group">
-                <label for="paspor-upload">14. Upload Foto Paspor (Jika sudah terima/memiliki paspor)</label>
+                <label for="paspor-upload">16. Upload Foto Paspor (Jika sudah terima/memiliki paspor)</label>
                 <img src="img/pict-1.png" alt="Banner Contoh Paspor" class="banner-img">
                 <label for="paspor-upload" class="file-upload-wrapper">
                     <div class="file-upload-icon">
@@ -387,7 +431,7 @@
 
     <script>
         // PENTING: Ganti URL ini dengan URL Web App dari Google Apps Script Anda
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx95qvJyiW_p8xb7vcripaG7uVlwxClqiOr6-EUC1H3ovL7nJ4SSs6TmkmlGHl-0HEf/exec'; 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFuUB2w4_fKtQJ3MjZR1qCmzqlmpnnou2kfuACRUS0WU6GFXlC5PpGbTyaV8FewxUO/exec'; 
 
         // --- Elemen-elemen Form ---
         const form = document.getElementById('simcard-form');
@@ -395,6 +439,10 @@
         const successMessage = document.getElementById('success-message');
         const namaLengkapInput = document.getElementById('nama-lengkap');
         
+        const sumberRadios = document.querySelectorAll('input[name="Sumber Informasi"]');
+        const sumberLainnyaText = document.getElementById('sumber-lainnya-text');
+        const picGroup = document.getElementById('pic-group');
+
         const zaryuDepanUpload = document.getElementById('zaryu-depan-upload');
         const zaryuBelakangUpload = document.getElementById('zaryu-belakang-upload');
         const pasporUpload = document.getElementById('paspor-upload');
@@ -408,6 +456,28 @@
         // Auto-kapitalisasi untuk Nama Lengkap
         namaLengkapInput.addEventListener('input', function() {
             this.value = this.value.toUpperCase();
+        });
+
+        // Logika Sumber Informasi & PIC
+        sumberRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.id === 'sumber-lainnya') {
+                    sumberLainnyaText.disabled = false;
+                    sumberLainnyaText.required = true;
+                    sumberLainnyaText.focus();
+                } else {
+                    sumberLainnyaText.disabled = true;
+                    sumberLainnyaText.required = false;
+                    sumberLainnyaText.value = ''; 
+                }
+
+                if (this.value === 'Sosialisasi di LPK') {
+                    picGroup.style.display = 'block';
+                } else {
+                    picGroup.style.display = 'none';
+                    document.querySelectorAll('input[name="PIC"]').forEach(r => r.checked = false);
+                }
+            });
         });
 
         // Menampilkan nama file yang di-upload
@@ -440,6 +510,11 @@
                     data[key] = value;
                 }
             });
+
+            // Override Sumber Informasi jika memilih "Lainnya"
+            if (data['Sumber Informasi'] === 'Lainnya') {
+                data['Sumber Informasi'] = sumberLainnyaText.value;
+            }
 
             const zaryuDepanFile = zaryuDepanUpload.files[0];
             const zaryuBelakangFile = zaryuBelakangUpload.files[0];
@@ -505,4 +580,3 @@
     </script>
 </body>
 </html>
-
