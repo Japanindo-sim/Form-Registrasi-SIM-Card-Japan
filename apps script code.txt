@@ -1,0 +1,106 @@
+/**
+ * Skrip ini menangani pengiriman data dari formulir HTML, menyimpannya ke Google Sheet,
+ * dan mengunggah file ke folder tertentu di Google Drive.
+ *
+ * @param {object} e - Objek event yang dikirim dari permintaan POST.
+ * @returns {ContentService.TextOutput} - Respon JSON yang menunjukkan keberhasilan atau kegagalan.
+ */
+function doPost(e) {
+  try {
+    // Parse data JSON yang masuk dari formulir
+    const data = JSON.parse(e.postData.contents);
+
+    // Konfigurasi Spreadsheet dan Drive
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Responses");
+    if (!sheet) {
+      throw new Error("Sheet 'Responses' tidak ditemukan. Mohon buat sheet dengan nama tersebut.");
+    }
+
+    const driveFolderId = "1UDjWk3aoDRGYtAqIJLUXw1i9_wm03zSy"; // GANTI DENGAN ID FOLDER ANDA
+    const driveFolder = DriveApp.getFolderById(driveFolderId);
+
+    // Buat folder unik untuk setiap pendaftar
+    const timestamp = new Date();
+    const formattedTimestamp = Utilities.formatDate(timestamp, "GMT+9", "yyyy-MM-dd HH:mm:ss");
+    const pendaftarFolderName = `${data["Nama Lengkap"] || 'Tanpa Nama'} - ${formattedTimestamp}`;
+    const pendaftarFolder = driveFolder.createFolder(pendaftarFolderName);
+
+    // Proses unggah file dan dapatkan URL-nya
+    const zaryuDepanUrl = uploadFileToDrive(data["Foto Zaryu Card (Depan)"], pendaftarFolder);
+    const zaryuBelakangUrl = uploadFileToDrive(data["Foto Zaryu Card (Belakang)"], pendaftarFolder);
+    const pasporUrl = uploadFileToDrive(data["Foto Paspor"], pendaftarFolder);
+
+    // Tentukan header untuk sheet
+    const headers = [
+      "Timestamp", "1. Nama Lengkap", "2. Tanggal Lahir", "3. Alamat Jepang", 
+      "4. Rencana Pulang", "5. LPK/SO", "6. No WhatsApp", "7. Email", 
+      "8. Tanggal Aktivasi", "9. Merk HP", "10. Kode Referal", "11. Pilihan Paket",
+      "12. Sumber Informasi", "13. PIC",
+      "14. Foto Zaryu Card (Depan)", "15. Foto Zaryu Card (Belakang)", "16. Foto Paspor"
+    ];
+
+    // Jika sheet kosong, tambahkan header
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(headers);
+    }
+    
+    // Siapkan baris data untuk dimasukkan ke sheet
+    const rowData = [
+      formattedTimestamp,
+      data["Nama Lengkap"] || "",
+      data["Tanggal Lahir"] || "",
+      data["Alamat Jepang"] || "",
+      data["Rencana Pulang"] || "",
+      data["LPK/SO"] || "",
+      data["No WhatsApp"] || "",
+      data["Email"] || "",
+      data["Tanggal Aktivasi"] || "",
+      data["Merk HP"] || "",
+      data["Kode Referal"] || "", 
+      data["Pilihan Paket"] || "",
+      data["Sumber Informasi"] || "",
+      data["PIC"] || "",
+      zaryuDepanUrl,
+      zaryuBelakangUrl,
+      pasporUrl
+    ];
+
+    // Tambahkan data ke baris baru di sheet
+    sheet.appendRow(rowData);
+
+    // Kirim respon sukses kembali ke klien
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: "success", message: "Data berhasil dikirim." }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    Logger.log(error.toString());
+    // Kirim respon error kembali ke klien
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Mengunggah file yang di-encode Base64 ke folder Google Drive yang ditentukan.
+ *
+ * @param {object} fileObject - Objek yang berisi data file (fileName, mimeType, data).
+ * @param {Folder} folder - Objek Folder DriveApp tempat file akan diunggah.
+ * @returns {string} - URL file yang diunggah, atau "Tidak diunggah" jika tidak ada file.
+ */
+function uploadFileToDrive(fileObject, folder) {
+  if (!fileObject || !fileObject.data) {
+    return "Tidak diunggah";
+  }
+
+  try {
+    const decodedData = Utilities.base64Decode(fileObject.data);
+    const blob = Utilities.newBlob(decodedData, fileObject.mimeType, fileObject.fileName);
+    const file = folder.createFile(blob);
+    return file.getUrl();
+  } catch (error) {
+    Logger.log("Gagal mengunggah file: " + error.toString());
+    return "Gagal unggah";
+  }
+}
