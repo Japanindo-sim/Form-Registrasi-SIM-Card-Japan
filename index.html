@@ -257,55 +257,58 @@
                 <input type="text" id="nama-lengkap" name="Nama Lengkap" class="form-control" placeholder="Tulis sesuai Zaryu Card (huruf kapital)" required>
             </div>
 
+            <!-- DINONAKTIFKAN (permintaan revisi): Field Tanggal Lahir dihapus dari tampilan.
+                 Kode disimpan sebagai comment agar mudah diaktifkan kembali di masa depan.
             <div class="form-group">
                 <label for="tanggal-lahir">2. Tanggal Lahir</label>
                 <input type="date" id="tanggal-lahir" name="Tanggal Lahir" class="form-control" required>
             </div>
+            -->
 
             <div class="form-group">
-                <label for="alamat-jepang">3. Alamat Tempat Tinggal di Jepang + Kode Pos</label>
+                <label for="alamat-jepang">2. Alamat Tempat Tinggal di Jepang + Kode Pos</label>
                 <textarea id="alamat-jepang" name="Alamat Jepang" class="form-control" rows="3" placeholder="Contoh: 100-0001, Tokyo-to, Chiyoda-ku, Chiyoda 1-1" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="rencana-pulang">4. Rencana Pulang ke Indonesia</label>
+                <label for="rencana-pulang">3. Rencana Pulang ke Indonesia</label>
                 <input type="date" id="rencana-pulang" name="Rencana Pulang" class="form-control" required>
             </div>
             
             <div class="form-group">
-                <label for="lpk">5. Dari LPK Mana?</label>
+                <label for="lpk">4. Dari LPK Mana?</label>
                 <input type="text" id="lpk" name="LPK/SO" class="form-control" placeholder="Contoh: LPK JIAEC / IM JAPAN" required>
             </div>
 
             <div class="form-group">
-                <label for="whatsapp">6. No WhatsApp atau Telepon Kamu Saat Ini</label>
+                <label for="whatsapp">5. No WhatsApp atau Telepon Kamu Saat Ini</label>
                 <input type="tel" id="whatsapp" name="No WhatsApp" class="form-control" placeholder="Contoh: +81 80-1234-5678" required>
             </div>
 
             <div class="form-group">
-                <label for="email">7. Email Aktif</label>
+                <label for="email">6. Email Aktif</label>
                 <input type="email" id="email" name="Email" class="form-control" placeholder="contoh@email.com" required>
             </div>
             
             <div class="form-group">
-                <label for="tanggal-aktivasi">8. Tanggal aktivasi kartu simcard JP Smart</label>
+                <label for="tanggal-aktivasi">7. Tanggal aktivasi kartu simcard JP Smart</label>
                 <p class="label-note">kartu bisa digunakan sesuai tanggal yang dipilih.</p>
                 <input type="date" id="tanggal-aktivasi" name="Tanggal Aktivasi" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="hp">9. Merk & Tipe HP</label>
+                <label for="hp">8. Merk & Tipe HP</label>
                 <input type="text" id="hp" name="Merk HP" class="form-control" placeholder="Contoh: iPhone 16 Pro Max 1TB" required>
             </div>
             
             <div class="form-group">
-                <label for="referal">10. Kode Referal / Referensi</label>
+                <label for="referal">9. Kode Referal / Referensi</label>
                 <input type="text" id="referal" name="Kode Referal" class="form-control" placeholder="Contoh: AKA Apparel Championship / Sensei Sabine / Fb / Tiktok / Lain Nya">
             </div>
 
             <div class="form-group">
-                <label>11. Pilihan Paket Bulanan</label>
-                <img src="img/pict-3.png" alt="Banner Pilihan Paket" class="banner-img">
+                <label>10. Pilihan Paket Bulanan</label>
+                <img src="img/paket-new.png" alt="Banner Pilihan Paket" class="banner-img">
                  <div class="radio-group">
                     <h3 style="color:#7a0000;">Harga ¥3300 (Biaya Aktfiasi Awal)</h3>
                     <p class="sub-judul">(termasuk simcard + free kuota 2 bulan)</p>
@@ -318,10 +321,13 @@
                         <input type="radio" id="paket2" name="Pilihan Paket" value="20 GB Call Sim - Sinyal 5G (¥2.178/bulan)">
                         <label for="paket2">20 GB Call Sim - Sinyal 5G (¥2.178/bulan)</label>
                     </div>
+                    <!-- DINONAKTIFKAN (permintaan revisi): Pilihan 100 GB Call Sim dihapus dari tampilan.
+                         Kode disimpan sebagai comment agar mudah diaktifkan kembali di masa depan.
                     <div class="radio-option">
                         <input type="radio" id="paket3" name="Pilihan Paket" value="100 GB Call Sim - Sinyal 5G (¥5.478/bulan)">
                         <label for="paket3">100 GB Call Sim - Sinyal 5G (¥5.478/bulan)</label>
                     </div>
+                    -->
                     <div class="radio-option">
                         <input type="radio" id="paket4" name="Pilihan Paket" value="3 GB Data Sim - Sinyal 4G LTE (¥1.078/bulan)">
                         <label for="paket4">3 GB Data Sim - Sinyal 4G LTE (¥1.078/bulan)</label>
@@ -330,15 +336,18 @@
                         <input type="radio" id="paket5" name="Pilihan Paket" value="20 GB Data Sim - Sinyal 4G LTE (¥1.848/bulan)">
                         <label for="paket5">20 GB Data Sim - Sinyal 4G LTE (¥1.848/bulan)</label>
                     </div>
+                    <!-- DINONAKTIFKAN (permintaan revisi): Pilihan 100 GB Data Sim dihapus dari tampilan.
+                         Kode disimpan sebagai comment agar mudah diaktifkan kembali di masa depan.
                     <div class="radio-option">
                         <input type="radio" id="paket6" name="Pilihan Paket" value="100 GB Data Sim - Sinyal 4G LTE (¥5.148/bulan)">
                         <label for="paket6">100 GB Data Sim - Sinyal 4G LTE (¥5.148/bulan)</label>
                     </div>
+                    -->
                  </div>
             </div>
 
             <div class="form-group">
-                <label>12. Dari mana Anda mengetahui informasi mengenai JP SMART SIM?</label>
+                <label>11. Dari mana Anda mengetahui informasi mengenai JP SMART SIM?</label>
                 <div class="radio-group" id="sumber-info-group">
                     <div class="radio-option">
                         <input type="radio" id="sumber-ig" name="Sumber Informasi" value="Instagram" required>
@@ -369,11 +378,18 @@
             </div>
 
             <div class="form-group" id="pic-group" style="display: none;">
-                <label>13. Jika mendapatkan informasi dari Sosialisasi di LPK atau Team JP SMART SIM, dengan siapa Anda terhubung?</label>
+                <label>12. Jika mendapatkan informasi dari Sosialisasi di LPK atau Team JP SMART SIM, dengan siapa Anda terhubung?</label>
                 <div class="radio-group">
+                    <!-- DIGANTI (permintaan revisi): Opsi "Mba There" digantikan oleh "Mba Jeje" di bawah.
+                         Kode asli disimpan sebagai comment agar mudah diaktifkan kembali di masa depan.
                     <div class="radio-option">
                         <input type="radio" id="pic-there" name="PIC" value="Mba There">
                         <label for="pic-there">Mba There</label>
+                    </div>
+                    -->
+                    <div class="radio-option">
+                        <input type="radio" id="pic-jeje" name="PIC" value="Mba Jeje">
+                        <label for="pic-jeje">Mba Jeje</label>
                     </div>
                     <div class="radio-option">
                         <input type="radio" id="pic-hegar" name="PIC" value="Mas Hegar">
@@ -383,7 +399,7 @@
             </div>
             
             <div class="form-group">
-                <label for="zaryu-depan-upload">14. Upload Foto Zaryu Card (Depan)</label>
+                <label for="zaryu-depan-upload">13. Upload Foto Zaryu Card (Depan)</label>
                 <img src="img/pict-4.png" alt="Banner Contoh Zaryu card Depan" class="banner-img">
                 <label for="zaryu-depan-upload" class="file-upload-wrapper">
                      <div class="file-upload-icon">
@@ -396,7 +412,7 @@
             </div>
             
             <div class="form-group">
-                <label for="zaryu-belakang-upload">15. Upload Foto Zaryu Card (Belakang)</label>
+                <label for="zaryu-belakang-upload">14. Upload Foto Zaryu Card (Belakang)</label>
                 <img src="img/pict-5.png" alt="Banner Contoh Zaryu card Belakang" class="banner-img">
                 <label for="zaryu-belakang-upload" class="file-upload-wrapper">
                     <div class="file-upload-icon">
@@ -409,7 +425,7 @@
             </div>
 
             <div class="form-group">
-                <label for="paspor-upload">16. Upload Foto Paspor (Jika sudah terima/memiliki paspor)</label>
+                <label for="paspor-upload">15. Upload Foto Paspor (Jika sudah terima/memiliki paspor)</label>
                 <img src="img/pict-1.png" alt="Banner Contoh Paspor" class="banner-img">
                 <label for="paspor-upload" class="file-upload-wrapper">
                     <div class="file-upload-icon">
